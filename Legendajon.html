@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="uz"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Ossonpay — oʻyin donat doʻkoni</title>
+<style>
+:root{--bg:#eef3ff;--card:#fff;--tx:#0a1030;--mu:#5b678f;--ac:#2a6bff;--ac2:#14c8ff;--bd:#d5def5;--tint:#e3ecff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#05070f;--card:#111827;--tx:#fff;--mu:#9aa6c7;--ac:#3c8cff;--bd:#1f2a44;--tint:#16256b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#05070f;--card:#111827;--tx:#fff;--mu:#9aa6c7;--ac:#3c8cff;--bd:#1f2a44;--tint:#16256b;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--bg)}
+body{margin:0 auto;max-width:520px;padding:16px 14px 130px;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1{margin:0;font-size:30px;font-weight:800;letter-spacing:1px;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin:2px 0 18px;color:var(--mu);font-size:14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.one{grid-template-columns:1fr}
+.cat{display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:12px;cursor:pointer;font:inherit;color:inherit;text-align:left}
+.b{flex:none;width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px}
+.cat span{font-size:14px;font-weight:600;line-height:1.25}
+.back{background:none;border:0;color:var(--ac);font:inherit;font-size:15px;padding:4px 0;cursor:pointer}
+h2{margin:6px 0 12px;font-size:22px}
+h3{margin:18px 0 8px;font-size:12px;letter-spacing:1px;color:var(--mu);text-transform:uppercase}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.tab{padding:10px 16px;border-radius:999px;border:0;background:var(--card);color:var(--tx);font:inherit;font-weight:600;font-size:14px;cursor:pointer}
+.tab.on{background:var(--ac);color:#fff}
+.pk{display:flex;flex-direction:column;align-items:flex-start;gap:4px;box-sizing:border-box;padding:14px;background:var(--card);border:1.5px solid var(--bd);border-radius:14px;font:inherit;color:inherit;cursor:pointer;text-align:left}
+.pk.sel{border-color:var(--ac);background:var(--tint)}
+.pk b{font-size:15px;line-height:1.25}.pk i{font-style:normal;color:var(--ac);font-size:14px}
+.box{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px;margin-bottom:12px}
+label{display:block;margin:0 0 6px;font-size:13px;color:var(--mu);font-weight:600}
+input{width:100%;box-sizing:border-box;padding:13px;border-radius:12px;border:1.5px solid var(--bd);background:var(--bg);color:var(--tx);font:inherit;font-size:16px}
+.bar{position:fixed;left:0;right:0;bottom:0;display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 14px calc(12px + env(safe-area-inset-bottom,0px));background:var(--card);border-top:1px solid var(--bd)}
+.bar small{display:block;color:var(--mu);font-size:12px}.bar strong{font-size:18px}
+.go{flex:none;padding:14px 22px;border:0;border-radius:14px;background:linear-gradient(90deg,var(--ac),var(--ac2));color:#fff;font:inherit;font-weight:700;font-size:16px;cursor:pointer;text-decoration:none}
+.go[disabled]{opacity:.45}
+pre{white-space:pre-wrap;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;font:inherit;font-size:15px;line-height:1.6}
+.note{color:var(--mu);font-size:13px;line-height:1.5}
+.row{display:flex;gap:10px;margin-top:12px}.row .go{flex:1;text-align:center}
+.alt{background:var(--tint);color:var(--ac)}
+.seg{display:flex;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:4px;margin-bottom:12px}
+.seg button{flex:1;padding:12px;border:0;border-radius:10px;background:none;color:var(--mu);font:inherit;font-weight:600;cursor:pointer}
+.seg button.on{background:var(--ac);color:#fff}
+</style><script src="https://telegram.org/js/telegram-web-app.js"></script></head><body>
+<div id="app"></div>
+<script>
+const CARD="8600530401645398",BOT="Tezzerpaybot",RATE=12700,STAR=195;
+const G=[
+{n:"PUBG Mobile",b:"PU",id:"Oʻyinchi ID",tabs:[
+["UC",[["60 UC",11300],["325 UC",56400],["660 UC",113900],["1800 UC",284800],["3850 UC",569400],["8100 UC",1138800]]],
+["Prime",[["Prime (1 Month)",11100],["Prime (3 Months)",33400],["Prime (6 Months)",66800],["Prime Plus (1 Month)",111300],["Prime (12 Months)",133600],["Prime Plus (3 Months)",334000],["Prime Plus (6 Months)",667900],["Prime Plus (12 Months)",1335800]]],
+["Paketlar",[["Birinchi Xarid UC",11100],["M416 / Material UC",33400],["Mythic Emblem UC",55700],["Haftalik Mythic UC",33400],["Haftalik Paket 1 UC",11100],["Haftalik Paket 2 UC",33500]]]]},
+{n:"Free Fire",b:"FF",id:"Oʻyinchi ID",tabs:[
+["Olmoslar",[["110 Diamonds",10000],["341 Diamonds",30400],["572 Diamonds",49400],["1166 Diamonds",99000],["2398 Diamonds",198100],["6160 Diamonds",501800]]],
+["Obunalar",[["Weekly Lite",4800],["Evo Access 3 kunlik",5300],["Evo Access 7 kunlik",9000],["Haftalik Obuna (Weekly)",19800],["Evo Access 30 kunlik",26400],["Oylik Obuna (Monthly)",71300]]],
+["Level Up",[["Level Up 6",3700],["Level Up 10",6600],["Level Up 15",6600],["Level Up 20",6600],["Level Up 25",6600],["Level Up 30",9500]]]]},
+{n:"Blood Strike",b:"BS",id:"Oʻyinchi ID",tabs:[
+["BC",[["51 BC",5400],["105 BC",10000],["320 BC",29000],["540 BC",48300],["1100 BC",96500],["2260 BC",192900],["5800 BC",480500]]],
+["Pass",[["Season Pass",10000],["Level Up Pass",21000],["Strike Pass Elite",42000],["Strike Pass Premium",94700]]],
+["Deal",[["0.49 DEAL",5300],["0.99 DEAL",10500],["1.99 DEAL",21100],["2.99 DEAL",31800],["3.99 DEAL",42300],["4.99 DEAL",52900],["5.99 DEAL",63500],["6.99 DEAL",74000],["7.99 DEAL",84700],["8.99 DEAL",95200],["9.99 DEAL",105800]]],
+["Boshqa",[["Ultra Skin Lucky Chest",5300],["Lucky Bag Week",10500]]]]},
+{n:"Roblox",b:"RB",id:"Roblox login",tabs:[
+["Global Robux",[["50 Robux",20600],["800 Robux",122000],["1000 Robux",150000],["1500 Robux",237400],["2000 Robux",299000],["4500 Robux",645000],["10000 Robux",1325000]]],
+["RU Robux",[["50 Robux",20600],["199 Robux",34300],["255 Robux",44800],["345 Robux",58800],["380 Robux",66100],["395 Robux",68600],["400 Robux",77600],["520 Robux",103400],["800 Robux",122000],["715 Robux",123500],["1000 Robux",150000],["1100 Robux",206000],["1500 Robux",237400],["2000 Robux",299000],["1785 Robux",308700],["4500 Robux",645000]]],
+["US Robux",[["50 Robux",20600],["275 Robux",34300],["360 Robux",44800],["555 Robux",68600],["800 Robux",122000],["1000 Robux",150000],["2500 Robux",389000],["5250 Robux",617300],["11000 Robux",1267500]]],
+["USD Gift Card",[["10 USD",123500],["15 USD",190100],["20 USD",253500],["25 USD",301300],["30 USD",382000],["50 USD",602500],["100 USD",1267500],["200 USD",2535100]]]]},
+{n:"Steam Hamyon",b:"ST",steam:1},
+{n:"Premium xarid",b:"PR",who:1,one:1,tabs:[["Premium",[["1 oy Premium",60000],["3 oy Premium",145000],["6 oy Premium",257000],["12 oy Premium",460000]]]]},
+{n:"Stars xarid",b:"★",who:1,one:1,custom:1,tabs:[["Stars",[["50 Stars",9750],["100 Stars",19500],["200 Stars",39000]]]]}
+];
+const app=document.getElementById("app");
+let ci=0,ti=0,pi=null,idv="",who="self",usd="",cs="";
+const f=n=>Math.round(n).toLocaleString("ru-RU")+" soʻm";
+function home(){
+stop();
+app.innerHTML='<h1>OSSONPAY</h1><p class="sub">Oʻyin donat doʻkoni. Boʻlimni tanlang</p><div class="grid">'+G.map((c,i)=>'<button class="cat" onclick="openCat('+i+')"><div class="b">'+c.b+'</div><span>'+c.n+'</span></button>').join("")+'</div>';
+}
+function openCat(i){ci=i;ti=0;pi=null;idv="";who="self";usd="";cs="";cat();}
+function idLabel(c){return c.who?(who==="other"?"Telegram @username":""):(c.id||"");}
+function total(){const c=G[ci];if(c.steam)return (+usd||0)*RATE;if(pi===-1)return (+cs||0)*STAR;return pi===null?0:c.tabs[ti][1][pi][1];}
+function ready(){const c=G[ci];if(c.steam)return idv.trim()&&+usd>=1;if(pi===null)return false;if(pi===-1&&!(+cs>=50))return false;return idLabel(c)?!!idv.trim():true;}
+function cat(){
+stop();
+const c=G[ci];let h='<button class="back" onclick="home()">← Orqaga</button><h2>'+c.n+'</h2>';
+if(c.steam){
+h+='<div class="box"><label>1. Steam loginingiz</label><input id="idf" autocomplete="off" placeholder="Misol: john_doe"><p class="note">Oʻyin ichidagi nik emas, kirishdagi loginingizni kiriting.</p></div><div class="box"><label>2. Toʻldirish summasi (USD)</label><input id="usd" type="number" min="1" inputmode="decimal" placeholder="5"><p class="note">Eng kam summa: $1 USD. Taxminan: <b id="est">0 soʻm</b></p></div>';
+}else{
+if(c.who)h+='<h3>1. Kimga?</h3><div class="seg"><button class="'+(who==="self"?"on":"")+'" onclick="setWho(\'self\')">Oʻzim uchun</button><button class="'+(who==="other"?"on":"")+'" onclick="setWho(\'other\')">Boshqaga</button></div>';
+if(idLabel(c))h+='<div class="box"><label>'+idLabel(c)+'</label><input id="idf" autocomplete="off"></div>';
+h+='<h3>'+(c.who?'2. Paket tanlang':'Mahsulotni tanlang')+'</h3>';
+if(c.tabs.length>1)h+='<div class="tabs">'+c.tabs.map((t,i)=>'<button class="tab'+(i===ti?' on':'')+'" onclick="setTab('+i+')">'+t[0]+'</button>').join("")+'</div>';
+h+='<div class="grid'+(c.one?' one':'')+'">'+c.tabs[ti][1].map((p,i)=>'<button class="pk'+(i===pi?' sel':'')+'" onclick="pick('+i+')"><b>'+p[0]+'</b><i>'+f(p[1])+'</i></button>').join("")+'</div>';
+if(c.custom)h+='<div class="box" style="margin-top:12px"><label>Yoki oʻzingiz kiriting (kamida 50 Stars)</label><input id="cs" type="number" min="50" inputmode="numeric" placeholder="Masalan: 150"></div>';
+}
+h+='<div class="bar"><div><small>Jami</small><strong id="tot">—</strong></div><button class="go" id="ord" onclick="order()">Buyurtma berish</button></div>';
+app.innerHTML=h;
+const e=document.getElementById("idf");if(e){e.value=idv;e.oninput=()=>{idv=e.value;upd();};}
+const u=document.getElementById("usd");if(u){u.value=usd;u.oninput=()=>{usd=u.value;upd();};}
+const s=document.getElementById("cs");if(s){s.value=cs;s.oninput=()=>{cs=s.value;pi=-1;document.querySelectorAll(".pk.sel").forEach(x=>x.classList.remove("sel"));upd();};}
+upd();
+}
+function upd(){const t=total();document.getElementById("tot").textContent=t?f(t):"—";const e=document.getElementById("est");if(e)e.textContent=f(t);document.getElementById("ord").disabled=!ready();}
+function setTab(i){ti=i;pi=null;cs="";cat();}
+function setWho(w){who=w;idv="";cat();}
+function pick(i){pi=i;cs="";cat();}
+let tm=null;
+function stop(){clearInterval(tm);}
+async function cp(txt,btn,ok){try{await navigator.clipboard.writeText(txt);btn.textContent=ok;}catch(e){btn.textContent="Qoʻlda belgilang";}}
+function buildText(){
+const c=G[ci];let t="Buyurtma\nBoʻlim: "+c.n;
+if(c.steam)t+="\nSteam login: "+idv.trim()+"\nSumma: $"+usd;
+else{const nm=pi===-1?cs+" Stars":c.tabs[ti][1][pi][0];if(c.tabs.length>1)t+=" / "+c.tabs[ti][0];t+="\nPaket: "+nm;if(c.who)t+="\nKimga: "+(who==="self"?"oʻzim uchun":"boshqaga");if(idLabel(c))t+="\n"+idLabel(c)+": "+idv.trim();}
+return t+"\nJami: "+f(total());
+}
+function order(){
+stop();
+app.innerHTML='<button class="back" onclick="cat()">← Orqaga</button><h2>Xaridni tasdiqlash</h2><pre id="sum"></pre><div class="row"><button class="go alt" onclick="cat()">Bekor qilish</button><button class="go" onclick="pay()">Toʻlovga oʻtish</button></div>';
+document.getElementById("sum").textContent=buildText();
+}
+function pay(){
+const t=buildText();let left=600;
+app.innerHTML='<button class="back" onclick="order()">← Orqaga</button><h2>Toʻlov</h2><div class="box"><label>Karta raqami</label><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><strong id="cn" style="font-size:20px;letter-spacing:1px"></strong><button class="go alt" id="cc" style="padding:10px 14px;font-size:14px">Nusxa</button></div><label style="margin-top:14px">Toʻlash kerak</label><strong id="am" style="font-size:26px;color:var(--ac)"></strong><p class="note">Muddati: <b id="tm">10:00</b></p></div><div class="box note">Aynan koʻrsatilgan summani oʻtkazing. Toʻlovdan soʻng chek skrinshotini va buyurtma matnini botga yuboring.</div><div class="row"><button class="go alt" id="co">Buyurtma matni</button><a class="go" href="https://t.me/'+BOT+'?start=order" target="_blank" rel="noopener">Toʻlov qildim</a></div><div class="row"><button class="go alt" onclick="order()">Bekor qilish</button></div>';
+document.getElementById("cn").textContent=CARD.replace(/(\d{4})(?=\d)/g,"$1 ");
+document.getElementById("am").textContent=f(total());
+document.getElementById("cc").onclick=function(){cp(CARD,this,"Nusxalandi");};
+document.getElementById("co").onclick=function(){cp(t,this,"Nusxalandi");};
+tm=setInterval(()=>{left--;const e=document.getElementById("tm");if(!e){stop();return;}if(left<=0){stop();e.textContent="Muddat tugadi";return;}e.textContent=String(Math.floor(left/60)).padStart(2,"0")+":"+String(left%60).padStart(2,"0");},1000);
+}
+home();try{Telegram.WebApp.ready();Telegram.WebApp.expand();}catch(e){}
+</script></body></html>
